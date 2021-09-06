@@ -1,0 +1,31 @@
+{% extends 'store/main.html' %} {% load static %} {% block shop %} active-link
+{% endblock shop %} {% block content %}
+
+<main class="l-main">
+  <section class="featured section" id="shop">
+    <h2 class="section-title">All Products</h2>
+
+    <div class="featured__container bd-grid">
+      {% for product in products %}
+      <article class="sneaker">
+        <img
+          src="{{product.imageURL}}"
+          alt="featured-images"
+          class="sneaker__img"
+        />
+        <span class="sneaker__name">{{product.name}}</span>
+        <span class="sneaker__price">${{product.price}}</span>
+        <a
+          href="#"
+          class="button-light update-cart"
+          data-product="{{product.id}}"
+          data-action="add"
+          >Add to cart <i class="bx bx-right-arrow-alt button-icon"></i
+        ></a>
+      </article>
+      {% endfor %}
+    </div>
+  </section>
+</main>
+
+{% endblock content %}

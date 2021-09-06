@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+	<title>Shoes Ecommerce</title>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1" />
+
+	{% block head %}
+
+	<!-- ==== BOOTSTRAP ==== -->
+
+	{% endblock head %}
+
+	    <!--! ===== CSS ===== -->
+
+
+	<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/landing-page.css' %}">
+
+
+	    <!--* ===== BOX ICONS ===== -->
+		<link
+		href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css"
+		rel="stylesheet"
+	  />
+
+	<script type="text/javascript">
+		var user = '{{request.user}}'
+
+		function getToken(name) {
+		    var cookieValue = null;
+		    if (document.cookie && document.cookie !== '') {
+		        var cookies = document.cookie.split(';');
+		        for (var i = 0; i < cookies.length; i++) {
+		            var cookie = cookies[i].trim();
+		            // Does this cookie string begin with the name we want?
+		            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+		                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+		                break;
+		            }
+		        }
+		    }
+		    return cookieValue;
+		}
+		var csrftoken = getToken('csrftoken')
+
+		function getCookie(name) {
+		    // Split cookie string and get all individual name=value pairs in an array
+		    var cookieArr = document.cookie.split(";");
+
+		    // Loop through the array elements
+		    for(var i = 0; i < cookieArr.length; i++) {
+		        var cookiePair = cookieArr[i].split("=");
+
+		        /* Removing whitespace at the beginning of the cookie name
+		        and compare it with the given string */
+		        if(name == cookiePair[0].trim()) {
+		            // Decode the cookie value and return
+		            return decodeURIComponent(cookiePair[1]);
+		        }
+		    }
+
+		    // Return null if not found
+		    return null;
+		}
+		var cart = JSON.parse(getCookie('cart'))
+
+		if (cart == undefined){
+			cart = {}
+			console.log('Cart Created!', cart)
+			document.cookie ='cart=' + JSON.stringify(cart) + ";domain=;path=/"
+		}
+	
+	</script>
+
+</head>
+<body>
+	    <!--===== HEADER =====-->
+		<header class="l-header" id="header">
+			<nav class="nav bd-grid">
+			  <div class="nav__toggle" id="nav-toggle">
+				<i class="bx bxs-grid"></i>
+			  </div>
+	  
+			  <a href="{% url 'store' %}" class="nav__logo">Hyper</a>
+	  
+			  <div class="nav__menu" id="nav-menu">
+				<ul class="nav__list">
+				  <li class="nav__item">
+					<a href="{% url 'store' %}" class="nav__link ">Home</a>
+				  </li>
+				  <li class="nav__item">
+					<a href="{% url 'store' %}#featured" class="nav__link">Featured</a>
+				  </li>
+				  <li class="nav__item">
+					<a href="{% url 'store' %}#women" class="nav__link">Women</a>
+				  </li>
+				  <li class="nav__item">
+					<a href="{% url 'store' %}#new" class="nav__link">New</a>
+				  </li>
+				  
+				  <li class="nav__item">
+					<a href="{% url 'shop' %}" class="nav__link {% block shop %}{% endblock shop %}">Shop</a>
+				  </li>
+				  <li class="nav__item">
+					<a href="{% url 'cart' %}" class="nav__link"><i class="bx bx-shopping-bag nav__shop"></i>
+					<p id="cart-total">{{cartItems}}</p>
+					</a>
+					
+				  </li>
+				</ul>
+			  </div>			
+			  </div>
+			</nav>
+		  </header>
+
+            {% block content %}
+
+
+            {% endblock content %}
+
+			<!--===== NEWSLETTER =====-->
+			<section class="newsletter section">
+				<div class="newsletter__container bd-grid">
+				  <div>
+					<h3 class="newsletter__title">
+					  Subscribe And Get <br />
+					  10% OFF
+					</h3>
+					<p class="newsletter__description">
+					  Get 10% discount for all our Products
+					</p>
+				  </div>
+		
+				  <form action="" class="newsletter__subscribe">
+					<input
+					  type="text"
+					  placeholder="your@email.com"
+					  class="newsletter__input"
+					/>
+					<a href="#" class="button">Subscribe</a>
+				  </form>
+				</div>
+			  </section>
+			</main>
+
+			<!--!===== FOOTER =====-->
+			<footer class="footer section">
+				<div class="footer__container bd-grid">
+				  <div class="footer__box">
+					<h3 class="footer__title">Hyper</h3>
+					<p class="footer__description">New collection of shoes 2020.</p>
+				  </div>
+				  <div class="footer__box">
+					<h3 class="footer__title">EXPLORE</h3>
+					<ul>
+					  <li><a href="#home" class="footer__link">Home</a></li>
+					  <li><a href="#featured" class="footer__link">Featured</a></li>
+					  <li><a href="#women" class="footer__link">Women</a></li>
+					  <li><a href="#new" class="footer__link">New</a></li>
+					</ul>
+				  </div>
+				  <div class="footer__box">
+					<h3 class="footer__title">SUPPORT</h3>
+					<ul>
+					  <li><a href="#" class="footer__link">Product Help</a></li>
+					  <li><a href="#" class="footer__link">Customer Care</a></li>
+					  <li><a href="#" class="footer__link">Authorized Service</a></li>
+					</ul>
+				  </div>
+		  
+				  <div class="footer__box">
+					<a href="#" class="footer__social"><i class="bx bxl-facebook"></i></a>
+					<a href="#" class="footer__social"
+					  ><i class="bx bxl-instagram"></i
+					></a>
+					<a href="#" class="footer__social"><i class="bx bxl-twitter"></i></a>
+					<a href="#" class="footer__social"><i class="bx bxl-google"></i></a>
+				  </div>
+				</div>
+		  
+				<p class="footer__author">
+				  &#169; 2021
+				  <a class="footer__author-link" href="https://github.com/SergioRodas" target="_blank"
+					>Sergio Rodas</a
+				  >
+				  All Rights Reserved.
+				</p>
+			  </footer>
+
+
+    <!--===== MAIN JS =====-->
+    <script src="{% static 'js/main.js' %}"></script>
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+	<script type="text/javascript" src="{% static 'js/cart.js' %}"></script>
+</body>
+</html>

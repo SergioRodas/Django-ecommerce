@@ -1,0 +1,75 @@
+{% extends 'store/main.html' %}
+{% load static %}
+
+{% block head %}
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+{% endblock head %}
+
+{% block content %}
+<main class="l-main">
+
+	<div class="box-element box1">
+
+		<a class="button mb-4" href="{% url 'store' %}">&#x2190; Continue Shopping</a>
+
+		<table class="table">
+			<tr>
+				<th>
+					<h5 class="checkout-t1">Items: <strong>{{order.get_cart_items}}</strong></h5>
+				</th>
+				<th>
+					<h5 class="checkout-t1">Total:<strong> ${{order.get_cart_total|floatformat:2}}</strong></h5>
+				</th>
+				<th>
+					<a class="button checkout-btn" href="{% url 'checkout' %}">Checkout</a>
+				</th>
+			</tr>
+		</table>
+
+	</div>
+
+	<br>
+	<div class="box-element box2">
+		<div class="cart-row product-list items-cart-text">
+			<div class="title-pitems" style="flex:2"></div>
+			<div class="title-pitems" style="flex:2"><strong>Item</strong></div>
+			<div class="title-pitems" style="flex:1"><strong>Price</strong></div>
+			<div class="title-pitems" style="flex:1"><strong>Quantity</strong></div>
+			<div class="title-pitems" style="flex:1"><strong>Total</strong></div>
+		</div>
+		{% for item in items %}
+		<div class="cart-row product-list">
+
+			<div style="flex:2"><img class="row-image" src="{{item.product.imageURL}}"></div>
+			<div style="flex:2">
+				<p class="items-plist">{{item.product.name}}</p>
+			</div>
+			<div style="flex:1">
+				<p class="items-plist">${{item.product.price|floatformat:2}}</p>
+			</div>
+			<div class="quantity-plist" style="flex:1">
+				<p class="quantity items-plist quantity-number">{{item.quantity}}</p>
+				<div class="quantity">
+					<img data-product="{{item.product.id}}" data-action="add" class="chg-quantity update-cart"
+						src="{% static  'images/arrow-up.png' %}">
+
+					<img data-product="{{item.product.id}}" data-action="remove" class="chg-quantity update-cart"
+						src="{% static  'images/arrow-down.png' %}">
+				</div>
+			</div>
+			<div style="flex:1">
+				<p class="items-plist">${{item.get_total|floatformat:2}}</p>
+			</div>
+		</div>
+
+
+	</div>
+	{% endfor %}
+	</div>
+
+</main>
+
+{% endblock content %}

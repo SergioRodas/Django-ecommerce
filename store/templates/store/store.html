@@ -1,0 +1,174 @@
+{% extends 'store/main.html' %} {% load static %} {% block content %}
+
+<main class="l-main">
+  <!--===== HOME =====-->
+  <section class="home" id="home">
+    <div class="home__container bd-grid">
+      <div class="home__sneaker">
+        <div class="home__shape"></div>
+        <img
+          src="{% static 'images/imghome.png' %}"
+          alt="home-images"
+          class="home__img"
+        />
+      </div>
+
+      <div class="home__data">
+        <span class="home__new">New In.</span>
+        <h1 class="home__title">
+          YEEZY BOOST <br />
+          SPLY - 350
+        </h1>
+        <p class="home__description">Explore the new collections of sneakers</p>
+        <a href="#new" class="button">Explore now.</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="featured section" id="featured">
+    <h2 class="section-title">FEATURED</h2>
+
+    <div class="featured__container bd-grid">
+      {% for product in featured %}
+      <article class="sneaker">
+        <div class="sneaker__sale">Sale</div>
+        <img
+          src="{{product.imageURL}}"
+          alt="featured-images"
+          class="sneaker__img"
+        />
+        <span class="sneaker__name">{{product.name}}</span>
+        <span class="sneaker__price">${{product.price}}</span>
+        <a
+          href="#"
+          class="button-light update-cart"
+          data-product="{{product.id}}"
+          data-action="add"
+          >Add to bag <i class="bx bx-right-arrow-alt button-icon"></i
+        ></a>
+      </article>
+      {% endfor %}
+    </div>
+  </section>
+
+  <!--===== COLLECTION =====-->
+  <section class="collection section">
+    <div class="collection__container bd-grid">
+      <div class="collection__card">
+        <div class="collection__data">
+          <h3 class="collection__name">Nike</h3>
+          <p class="collection__description">Nike Collection 2020</p>
+          <a href="{% url 'shop' %}" class="button-light"
+            >Buy now <i class="bx bx-right-arrow-alt button-icon"></i
+          ></a>
+        </div>
+
+        <img
+          src="{% static 'images/collection1.png' %}"
+          alt="collection-images"
+          class="collection__img"
+        />
+      </div>
+      <div class="collection__card">
+        <div class="collection__data">
+          <h3 class="collection__name">Adidas</h3>
+          <p class="collection__description">Adidas Collection 2019</p>
+          <a href="#" class="button-light"
+            >Buy now <i class="bx bx-right-arrow-alt button-icon"></i
+          ></a>
+        </div>
+
+        <img
+          src="{% static 'images/collection2.png' %}"
+          alt="collection-images"
+          class="collection__img"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!--===== WOMEN SNEAKERS =====-->
+  <section class="women section" id="women">
+    <h2 class="section-title">WOMEN SNEAKERS</h2>
+    <div class="women__container bd-grid">
+      {% for product in women %}
+      <article class="sneaker">
+        <img
+          src="{{product.imageURL}}"
+          alt="featured-images"
+          class="sneaker__img"
+        />
+        <span class="sneaker__name">{{product.name}}</span>
+        <span class="sneaker__price">${{product.price}}</span>
+        <a
+          href="#"
+          class="button-light update-cart"
+          data-product="{{product.id}}"
+          data-action="add"
+          >Add to bag <i class="bx bx-right-arrow-alt button-icon"></i
+        ></a>
+      </article>
+      {% endfor %}
+    </div>
+  </section>
+
+  <!--===== OFFER =====-->
+  <section class="offer section">
+    <div class="offer__container bd-grid">
+      <div class="offer__data">
+        <h3 class="offer__title">50% OFF</h3>
+        <p class="offer__description">In Adidas Superstar sneakers</p>
+        <a href="{% url 'shop' %}" class="button">Shop now.</a>
+      </div>
+      <img
+        src="{% static 'images/offert.png' %}"
+        alt="offer-images"
+        class="offer__img"
+      />
+    </div>
+  </section>
+
+  <section class="new section" id="new">
+    <h2 class="section-title">NEW COLLECTION</h2>
+
+    <div class="new__container bd-grid">
+      <div class="new__mens">
+        <img
+          src="{% static 'images/new1.png' %}"
+          alt="mens-fashion-photos"
+          class="new__mens-img"
+        />
+        <h3 class="new__title">Mens Shoes</h3>
+        <span class="new__price">From $79.89</span>
+        <a href="#" class="button-light"
+          >View Collection<i class="bx bx-right-arrow-alt button-icon"></i
+        ></a>
+      </div>
+
+      <div class="new__sneaker">
+        {% for product in news %}
+
+        <div class="new__sneaker-card">
+          <img
+            src="{{product.imageURL}}"
+            alt="new-sneaker-images"
+            class="new__sneaker-img"
+          />
+          <div class="new__sneaker-overlay">
+            <a
+              href="#"
+              class="button update-cart"
+              data-product="{{product.id}}"
+              data-action="add"
+              >Add to Bag</a
+            >
+          </div>
+        </div>
+
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+</main>
+
+{% endblock content %}
