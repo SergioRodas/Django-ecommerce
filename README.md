@@ -1,6 +1,6 @@
 # Django-ecommerce
 
-![Image text](https://github.com/SergioRodas/Django-ecommerce/blob/main/ecommerce.jpg)
+![Image text](https://github.com/SergioRodas/Django-ecommerce/blob/main/ecommerce.png)
 
 View site: https://shoes-2021.herokuapp.com/
 
