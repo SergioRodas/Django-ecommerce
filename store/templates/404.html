@@ -1,0 +1,26 @@
+{% extends 'store/main.html' %} {% load static %} {% block head %}
+
+<link
+  rel="stylesheet"
+  href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+  integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+  crossorigin="anonymous"
+/>
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+  integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg=="
+  crossorigin="anonymous"
+/>
+
+{% endblock head %} {% block content %}
+<main class="l-main">
+    <div class="box-element box1 checkout-box mb-1">
+    
+        <p class="empty my-4">Page not found</p>
+    
+        <a class="button mb-4" href="{% url 'store' %}">&#x2190; Continue Shopping</a>
+    
+    </div>
+</main>
+{% endblock content %}
