@@ -9,7 +9,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('store.urls')),
     url(r'^images/(?P<path>.*)$', serve,{'document_root': settings.MEDIA_ROOT}),
-
+    url(r'^admin/(?P<path>.*)$', serve,{'document_root': settings.ADMIN_ROOT}),
     url(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}),
 ]
 
