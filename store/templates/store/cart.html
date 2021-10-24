@@ -23,9 +23,11 @@
 				<th>
 					<h5 class="checkout-t1">Total:<strong> ${{order.get_cart_total|floatformat:2}}</strong></h5>
 				</th>
+				{% if items|length > 0 %}
 				<th>
 					<a class="button checkout-btn" href="{% url 'checkout' %}">Checkout</a>
 				</th>
+				{% endif %}
 			</tr>
 		</table>
 
@@ -33,44 +35,44 @@
 
 	<br>
 	<div class="box-element box2">
-
-		{% for item in items %}
-		<div class="cart-row product-list items-cart-text">
-			<div class="title-pitems" style="flex:2"></div>
-			<div class="title-pitems" style="flex:2"><strong>Item</strong></div>
-			<div class="title-pitems" style="flex:1"><strong>Price</strong></div>
-			<div class="title-pitems" style="flex:1"><strong>Quantity</strong></div>
-			<div class="title-pitems" style="flex:1"><strong>Total</strong></div>
-		</div>
-		<div class="cart-row product-list">
-
-			<div style="flex:2"><img class="row-image" src="{{item.product.imageURL}}"></div>
-			<div style="flex:2">
-				<p class="items-plist">{{item.product.name}}</p>
+		{% if items|length > 0 %}
+			{% for item in items %}
+			<div class="cart-row product-list items-cart-text">
+				<div class="title-pitems" style="flex:2"></div>
+				<div class="title-pitems" style="flex:2"><strong>Item</strong></div>
+				<div class="title-pitems" style="flex:1"><strong>Price</strong></div>
+				<div class="title-pitems" style="flex:1"><strong>Quantity</strong></div>
+				<div class="title-pitems" style="flex:1"><strong>Total</strong></div>
 			</div>
-			<div style="flex:1">
-				<p class="items-plist">${{item.product.price|floatformat:2}}</p>
-			</div>
-			<div class="quantity-plist" style="flex:1">
-				<p class="quantity items-plist quantity-number">{{item.quantity}}</p>
-				<div class="quantity">
-					<img data-product="{{item.product.id}}" data-action="add" class="chg-quantity update-cart"
-						src="{% static  'images/arrow-up.png' %}">
+			<div class="cart-row product-list">
 
-					<img data-product="{{item.product.id}}" data-action="remove" class="chg-quantity update-cart"
-						src="{% static  'images/arrow-down.png' %}">
+				<div style="flex:2"><img class="row-image" src="{{item.product.imageURL}}"></div>
+				<div style="flex:2">
+					<p class="items-plist">{{item.product.name}}</p>
+				</div>
+				<div style="flex:1">
+					<p class="items-plist">${{item.product.price|floatformat:2}}</p>
+				</div>
+				<div class="quantity-plist" style="flex:1">
+					<p class="quantity items-plist quantity-number">{{item.quantity}}</p>
+					<div class="quantity">
+						<img data-product="{{item.product.id}}" data-action="add" class="chg-quantity update-cart"
+							src="{% static  'images/arrow-up.png' %}">
+
+						<img data-product="{{item.product.id}}" data-action="remove" class="chg-quantity update-cart"
+							src="{% static  'images/arrow-down.png' %}">
+					</div>
+				</div>
+				<div style="flex:1">
+					<p class="items-plist">${{item.get_total|floatformat:2}}</p>
 				</div>
 			</div>
-			<div style="flex:1">
-				<p class="items-plist">${{item.get_total|floatformat:2}}</p>
-			</div>
-		</div>
 
-		{% endfor %}
-	</div>
-	
-	</div>
-
+			{% endfor %}
+		{% else %}
+		<p class="empty">The bag is empty</p>
+		{% endif %}		
+	</div>	
 </main>
 
 {% endblock content %}

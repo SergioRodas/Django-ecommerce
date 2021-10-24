@@ -184,5 +184,8 @@ a {
 .alert-success>.icon {
     background-color: var(--success);
 }
-
 /* success alert end */
+
+.empty {
+    text-align: center;
+}
