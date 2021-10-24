@@ -15,83 +15,131 @@
 
 {% endblock head %} {% block content %}
 <main class="l-main">
-  <div class="box-element box3" id="form-wrapper">
-    <div class="elements">
-      <form id="form" class="checkout-form">
-        <hr />
-        <h3 class="form-tittle">Contact Information:</h3>
-        <hr />
-        <div id="user-info">
-          <div class="form-field checkout-ff">
-            <input
-              required
-              class="form-control"
-              type="text"
-              name="name"
-              placeholder="Name.."
-            />
-          </div>
-          <div class="form-field checkout-ff">
-            <input
-              required
-              class="form-control"
-              type="email"
-              name="email"
-              placeholder="Email.."
-            />
-          </div>
-        </div>
-
-        <div id="shipping-info">
+  {% if items|length > 0 %}
+    <div class="box-element box3" id="form-wrapper">
+      <div class="elements">
+        <form id="form" class="checkout-form">
           <hr />
-          <p class="form-tittle">Shipping Information:</p>
+          <h3 class="form-tittle">Contact Information:</h3>
           <hr />
-          <div class="form-field checkout-ff">
-            <input
-              class="form-control"
-              type="text"
-              name="address"
-              placeholder="Address.."
-            />
+          <div id="user-info">
+            <div class="form-field checkout-ff">
+              <input
+                required
+                class="form-control"
+                type="text"
+                name="name"
+                placeholder="Name.."
+              />
+            </div>
+            <div class="form-field checkout-ff">
+              <input
+                required
+                class="form-control"
+                type="email"
+                name="email"
+                placeholder="Email.."
+              />
+            </div>
           </div>
-          <div class="form-field checkout-ff">
-            <input
-              class="form-control"
-              type="text"
-              name="city"
-              placeholder="City.."
-            />
-          </div>
-          <div class="form-field checkout-ff">
-            <input
-              class="form-control"
-              type="text"
-              name="state"
-              placeholder="State.."
-            />
-          </div>
-          <div class="form-field checkout-ff">
-            <input
-              class="form-control"
-              type="text"
-              name="zipcode"
-              placeholder="Zip code.."
-            />
-          </div>
-        </div>
 
-        <hr />
-        <div class="contact-btn">
-          <input
-            id="form-button"
-            class="button continue-btn"
-            type="submit"
-            value="Continue"
-          />
-        </div>
-      </form>
+          <div id="shipping-info">
+            <hr />
+            <p class="form-tittle">Shipping Information:</p>
+            <hr />
+            <div class="form-field checkout-ff">
+              <input
+                class="form-control"
+                type="text"
+                name="address"
+                placeholder="Address.."
+              />
+            </div>
+            <div class="form-field checkout-ff">
+              <input
+                class="form-control"
+                type="text"
+                name="city"
+                placeholder="City.."
+              />
+            </div>
+            <div class="form-field checkout-ff">
+              <input
+                class="form-control"
+                type="text"
+                name="state"
+                placeholder="State.."
+              />
+            </div>
+            <div class="form-field checkout-ff">
+              <input
+                class="form-control"
+                type="text"
+                name="zipcode"
+                placeholder="Zip code.."
+              />
+            </div>
+          </div>
+
+          <hr />
+          <div class="contact-btn">
+            <input
+              id="form-button"
+              class="button continue-btn"
+              type="submit"
+              value="Continue"
+            />
+          </div>
+        </form>
+      </div>
     </div>
-  </div>
+   
+    <div class="box-element box4">
+      <div class="sumary">
+        <div class="elements">
+          <hr />
+          <h3 class="sumary-tittle">Order Summary</h3>
+          <hr />
+          {% for item in items %}
+          <div class="cart-row">
+            <div style="flex: 2">
+              <img class="row-image" src="{{item.product.imageURL}}" />
+            </div>
+            <div style="flex: 2">
+              <p class="text-item-s">{{item.product.name}}</p>
+            </div>
+            <div style="flex: 1">
+              <p class="text-item-s">${{item.product.price|floatformat:2}}</p>
+            </div>
+            <div style="flex: 1">
+              <p class="text-item-s">x{{item.quantity}}</p>
+            </div>
+          </div>
+          {% endfor %}
+          <div class="sumary-items-text">
+            <h5>Items: {{order.get_cart_items}}</h5>
+            <h5>Total: ${{order.get_cart_total|floatformat:2}}</h5>
+          </div>
+        </div>
+        <div class="summary-button">
+          <a class="button mb-4" href="{% url 'cart' %}">&#x2190; Back to Bag</a>
+        </div>
+
+        <!-- <a  class="btn btn-outline-dark" href="{% url 'cart' %}">&#x2190; Back to Cart</a> -->
+      </div>
+    </div>
+
+  {% else %}
+
+  <div class="box-element box1 checkout-box mb-1">
+    
+    <p class="empty my-4">The bag is empty</p>
+
+		<a class="button mb-4" href="{% url 'store' %}">&#x2190; Continue Shopping</a>
+
+	</div>
+
+  {% endif %}
 
   <div class="box-element button hidden" id="payment-info">
     <small>Paypal Options</small>
@@ -112,40 +160,6 @@
     </button>
   </div>
 
-  <div class="box-element box4">
-    <div class="sumary">
-      <div class="elements">
-        <hr />
-        <h3 class="sumary-tittle">Order Summary</h3>
-        <hr />
-        {% for item in items %}
-        <div class="cart-row">
-          <div style="flex: 2">
-            <img class="row-image" src="{{item.product.imageURL}}" />
-          </div>
-          <div style="flex: 2">
-            <p class="text-item-s">{{item.product.name}}</p>
-          </div>
-          <div style="flex: 1">
-            <p class="text-item-s">${{item.product.price|floatformat:2}}</p>
-          </div>
-          <div style="flex: 1">
-            <p class="text-item-s">x{{item.quantity}}</p>
-          </div>
-        </div>
-        {% endfor %}
-        <div class="sumary-items-text">
-          <h5>Items: {{order.get_cart_items}}</h5>
-          <h5>Total: ${{order.get_cart_total|floatformat:2}}</h5>
-        </div>
-      </div>
-      <div class="summary-button">
-        <a class="button mb-4" href="{% url 'cart' %}">&#x2190; Back to Bag</a>
-      </div>
-
-      <!-- <a  class="btn btn-outline-dark" href="{% url 'cart' %}">&#x2190; Back to Cart</a> -->
-    </div>
-  </div>
 </main>
 
 <script type="text/javascript">
