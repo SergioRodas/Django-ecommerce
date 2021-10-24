@@ -93,6 +93,25 @@
         </form>
       </div>
     </div>
+
+    <div class="box-element button hidden" id="payment-info">
+      <small>Paypal Options</small>
+      <button id="make-payment">Make payment</button>
+    </div>
+    <div id="alert-success" class="alert alert-success hidden">
+      <span class="icon">
+        <i class="fa fa-check"></i>
+      </span>
+  
+      <div class="text">
+        <strong>Success</strong>
+        <p>Transaction completed!</p>
+      </div>
+  
+      <button class="close">
+        <i class="fa fa-close"></i>
+      </button>
+    </div>
    
     <div class="box-element box4">
       <div class="sumary">
@@ -141,25 +160,6 @@
 
   {% endif %}
 
-  <div class="box-element button hidden" id="payment-info">
-    <small>Paypal Options</small>
-    <button id="make-payment">Make payment</button>
-  </div>
-  <div id="alert-success" class="alert alert-success hidden">
-    <span class="icon">
-      <i class="fa fa-check"></i>
-    </span>
-
-    <div class="text">
-      <strong>Success</strong>
-      <p>Transaction completed!</p>
-    </div>
-
-    <button class="close">
-      <i class="fa fa-close"></i>
-    </button>
-  </div>
-
 </main>
 
 <script type="text/javascript">
@@ -190,6 +190,9 @@ document.getElementById("make-payment").addEventListener("click", () => {
     console.log("Form Submitted...");
     document.getElementById("form-button").classList.add("hidden");
     document.getElementById("payment-info").classList.remove("hidden");
+    document.cookie.split(";").forEach(function(c) {
+          document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
+        });
   });
 
   // document
